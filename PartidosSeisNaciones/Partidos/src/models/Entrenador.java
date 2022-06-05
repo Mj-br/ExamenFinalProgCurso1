@@ -10,8 +10,6 @@ public class Entrenador extends Persona {
 	
 	private int experiencia;
 	private Equipo equipo;
-	private ArrayList<Equipo> alineacion=new ArrayList <Equipo>();
-	private int mediaPuntos;
 
 	public Entrenador(String nombreCompleto, Date fechaNacimiento, int peso, int experiencia) {
 		super(nombreCompleto, fechaNacimiento, peso);

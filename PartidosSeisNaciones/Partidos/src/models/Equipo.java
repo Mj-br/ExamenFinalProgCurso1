@@ -1,6 +1,7 @@
 package models;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Equipo {
 
@@ -8,9 +9,23 @@ public class Equipo {
 	private int partidosGanados;
 	private ArrayList<Jugador> plantillaJugadores = new ArrayList<Jugador>();
 	private ArrayList<Entrenador> plantillaEntrenadores = new ArrayList<Entrenador>();
-	private ArrayList<Jugador> alineacion = new ArrayList<Jugador>();
+	private List<Jugador> alineacion = new ArrayList<Jugador>();
 	private int partidosEmpatados;
 	private int partidoPerdidos;
+	
+	
+	
+	//Set alineacion
+	
+	
+	public void setAlineacion(List<Jugador> alineacion) {
+		this.alineacion = alineacion;
+	}
+
+	public List<Jugador> getAlineacion() {
+		return alineacion;
+	}
+
 	private int puntosPartido;
 
 	public Equipo(Naciones nombreNacion) {

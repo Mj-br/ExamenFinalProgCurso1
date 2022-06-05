@@ -1,7 +1,6 @@
 package main;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 import models.Arbitro;
@@ -65,9 +64,24 @@ public class Main
 		
 		crearArbitros(random, arbitros);
 		
-		// El entrenador0 de escocia va a crear una alineación
-		System.out.println(escocia.getPlantillaEntrenadores().get(0).crearAlineacion(escocia.getPlantillaJugadores()));
-			
+		// Hacemos que un entrenador coja la alineación principal de sus jugadores.
+		
+		francia.setAlineacion(francia.getPlantillaEntrenadores().get(0).crearAlineacion(francia.getPlantillaJugadores()));
+		
+		
+		gales.setAlineacion(gales.getPlantillaEntrenadores().get(0).crearAlineacion(gales.getPlantillaJugadores()));
+		
+		inglaterra.setAlineacion(inglaterra.getPlantillaEntrenadores().get(0).crearAlineacion(inglaterra.getPlantillaJugadores()));
+		
+		irlanda.setAlineacion(irlanda.getPlantillaEntrenadores().get(0).crearAlineacion(irlanda.getPlantillaJugadores()));
+		
+		italia.setAlineacion(italia.getPlantillaEntrenadores().get(0).crearAlineacion(italia.getPlantillaJugadores()));
+
+		System.out.println(francia.getAlineacion());
+		System.out.println(gales.getAlineacion());	
+		System.out.println(inglaterra.getAlineacion());
+		System.out.println(irlanda.getAlineacion());
+		System.out.println(italia.getAlineacion());
 	}
 	
 
