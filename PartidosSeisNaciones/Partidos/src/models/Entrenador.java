@@ -1,6 +1,6 @@
 package models;
 
-import java.sql.Date;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -11,7 +11,7 @@ public class Entrenador extends Persona {
 	private int experiencia;
 	private Equipo equipo;
 
-	public Entrenador(String nombreCompleto, Date fechaNacimiento, int peso, int experiencia) {
+	public Entrenador(String nombreCompleto, LocalDate fechaNacimiento, int peso, int experiencia) {
 		super(nombreCompleto, fechaNacimiento, peso);
 		this.experiencia = experiencia;
 	}

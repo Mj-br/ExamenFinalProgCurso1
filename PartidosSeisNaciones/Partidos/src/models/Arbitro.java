@@ -1,12 +1,12 @@
 package models;
 
-import java.sql.Date;
+import java.time.LocalDate;
 
 public class Arbitro extends Persona {
 	
 	private int precision;
 
-	public Arbitro(String nombreCompleto, Date fechaNacimiento, int peso, int precision) {
+	public Arbitro(String nombreCompleto, LocalDate fechaNacimiento, int peso, int precision) {
 		super(nombreCompleto, fechaNacimiento, peso);
 		this.precision=precision;
 	}

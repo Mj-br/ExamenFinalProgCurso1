@@ -1,6 +1,6 @@
 package models;
 
-import java.sql.Date;
+import java.time.LocalDate;
 
 public class Jugador extends Persona {
 
@@ -14,8 +14,8 @@ public class Jugador extends Persona {
 	
 	private int mediaPuntos;
 
-	public Jugador(String nombreCompleto, Date fechaNacimiento, int peso, int velocidad, int fuerza, int resistencia) {
-		super(nombreCompleto, fechaNacimiento, peso);
+	public Jugador(String nombreCompleto, LocalDate randomBirthDate, int peso, int velocidad, int fuerza, int resistencia) {
+		super(nombreCompleto, randomBirthDate, peso);
 		this.velocidad = velocidad;
 		this.fuerza = fuerza;
 		this.resistencia = resistencia;
@@ -58,10 +58,11 @@ public class Jugador extends Persona {
 		
 		return mediaPuntos;
 	}
+	
 
 	@Override
 	public String toString() {
-		return super.toString() + "Jugador [equipo=" + equipo.getNombreNacion() + ", velocidad=" + velocidad + ", fuerza=" + fuerza
+		return super.toString() + " Jugador [equipo=" + equipo.getNombreNacion() + ", velocidad=" + velocidad + ", fuerza=" + fuerza
 				+ ", resistencia=" + resistencia + "]    " + mediaPuntos;
 	}
 

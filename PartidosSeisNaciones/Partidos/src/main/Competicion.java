@@ -1,26 +1,38 @@
 package main;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
+
+
 import models.Arbitro;
 import models.Entrenador;
 import models.Equipo;
+import models.Estadio;
 import models.Jugador;
 import models.Naciones;
+import models.Partido;
 
 
-public class Main
+public class Competicion
 {
+	static List<Jugador> jugadores = new ArrayList<Jugador>();
+	static List<Entrenador> entrenadores = new ArrayList<Entrenador>();
+	static List<Equipo> equipos = new ArrayList<Equipo>();
+	static List<Arbitro> arbitros = new ArrayList<Arbitro>();
+	static ArrayList<Partido> partidos = new ArrayList<>();
+	private static Estadio estadio = new Estadio();
+	
+
 	
 	public static void main (String[] args)
 	{
 		Random random = new Random();
 		
-		List<Jugador> jugadores = new ArrayList<Jugador>();
-		List<Entrenador> entrenadores = new ArrayList<Entrenador>();
-		List<Equipo> equipos = new ArrayList<Equipo>();
-		List<Arbitro> arbitros = new ArrayList<Arbitro>();
+		
 		
 		// Crear jugadores
 		crearJugadores(random, jugadores);
@@ -66,25 +78,45 @@ public class Main
 		
 		// Hacemos que un entrenador coja la alineación principal de sus jugadores.
 		
-		francia.setAlineacion(francia.getPlantillaEntrenadores().get(0).crearAlineacion(francia.getPlantillaJugadores()));
+		crearAlineacion(francia);
+		
+		crearAlineacion(gales);
+		
+		crearAlineacion(inglaterra);
+		
+		crearAlineacion(irlanda);
+		
+		crearAlineacion(italia);
+		
+		crearAlineacion(escocia);
 		
 		
-		gales.setAlineacion(gales.getPlantillaEntrenadores().get(0).crearAlineacion(gales.getPlantillaJugadores()));
-		
-		inglaterra.setAlineacion(inglaterra.getPlantillaEntrenadores().get(0).crearAlineacion(inglaterra.getPlantillaJugadores()));
-		
-		irlanda.setAlineacion(irlanda.getPlantillaEntrenadores().get(0).crearAlineacion(irlanda.getPlantillaJugadores()));
-		
-		italia.setAlineacion(italia.getPlantillaEntrenadores().get(0).crearAlineacion(italia.getPlantillaJugadores()));
 
-		System.out.println(francia.getAlineacion());
-		System.out.println(gales.getAlineacion());	
-		System.out.println(inglaterra.getAlineacion());
-		System.out.println(irlanda.getAlineacion());
-		System.out.println(italia.getAlineacion());
+	
+		
+		//System.out.println("\n");
+		
+		competir();
+		
+		
+		System.out.println(partidos);
+		
+	
 	}
+
+
+
+
+
+	
 	
 
+	// Métodos para el programa
+	
+	
+	
+	//Añadir entrenadores y jugadores
+	
 	private static void añadirEntrenadoresAEquipos(Random random, List<Entrenador> entrenadores, Equipo equipo) {
 		for(int i = 0; i<3 ; i++) {
 			int entrenadorRandom = random.nextInt(entrenadores.size());
@@ -107,13 +139,28 @@ public class Main
 	
 	private static void crearEntrenadores(Random random, List<Entrenador> entrenadores) {
 		for( int i=0; i<18; i++) {
-			entrenadores.add(new Entrenador("Entrenador "+i, null, random.nextInt(90-60)+60, random.nextInt(30)));
+			
+			int minDay = (int) LocalDate.of(1993, 1, 1).toEpochDay();
+			int maxDay = (int) LocalDate.of(2015, 1, 1).toEpochDay();
+			long randomDay = minDay + random.nextInt(maxDay - minDay);
+			
+			LocalDate randomBirthDate = LocalDate.ofEpochDay(randomDay);
+			
+			entrenadores.add(new Entrenador("Entrenador "+i, randomBirthDate, random.nextInt(90-60)+60, random.nextInt(30)));
 		}
 	}
 
 	private static void crearJugadores(Random random, List<Jugador> jugadores) {
+		
+		
 		for( int i=0; i<180; i++) {
-			jugadores.add(new Jugador("Jugador "+i, null, random.nextInt(90-60)+60, random.nextInt(100), random.nextInt(100), random.nextInt(100)));
+			int minDay = (int) LocalDate.of(1993, 1, 1).toEpochDay();
+			int maxDay = (int) LocalDate.of(2015, 1, 1).toEpochDay();
+			long randomDay = minDay + random.nextInt(maxDay - minDay);
+			
+			LocalDate randomBirthDate = LocalDate.ofEpochDay(randomDay);
+			jugadores.add(new Jugador("Jugador "+i, randomBirthDate, random.nextInt(90-60)+60, random.nextInt(100), random.nextInt(100), random.nextInt(100)));
+			
 		}
 	}
 	
@@ -126,5 +173,38 @@ public class Main
 		
 	}
 	
+	//crear alineación
+	
+	private static void crearAlineacion(Equipo equipo) {
+		equipo.setAlineacion(equipo.getPlantillaEntrenadores().get(0).crearAlineacion(equipo.getPlantillaJugadores()));
+	}
+	
+	// El método competir
+	
+	public static void competir() {
+		
+		if (equipos.size() <= 0) {
+			System.out.println("\n No hay equipos para competir");
+		} else {
+			Collections.shuffle(equipos);
+
+			for (int i = 0; i < equipos.size(); i++) {
+				for (int j = i + 1; j < equipos.size(); j++) {
+					ArrayList<Arbitro> arbitroCancha = new ArrayList<>();
+					arbitroCancha.add(arbitros.get(1));
+					arbitroCancha.add(arbitros.get(2));
+					arbitroCancha.add(arbitros.get(3));
+					Collections.shuffle(arbitros);
+					partidos.add(new Partido(equipos.get(i), equipos.get(j), new Date(), arbitroCancha));
+				}
+			}
+
+			Collections.shuffle(partidos);
+
+			for (Partido partido : partidos) {
+				partido.jugar(estadio);
+			}
+		}
+	}
 
 }
