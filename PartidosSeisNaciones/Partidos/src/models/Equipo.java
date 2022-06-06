@@ -116,7 +116,7 @@ public class Equipo {
 	public String toString() {
 		return "\nEquipo de: " + nombreNacion + ", Plantilla Total="
 				+ plantillaJugadores + "\nEntrenadores=" + plantillaEntrenadores + "\nAlineacion Estrella=" + alineacion
-				+ "\nSCORE: partidosEmpatados=" + partidosEmpatados + ", partidosPerdidos=" + partidosPerdidos + ", partidosGanados=" + partidosGanados + "]";
+				+ "\nSCORE: partidosEmpatados=" + partidosEmpatados + ", partidosPerdidos=" + partidosPerdidos + ", partidosGanados=" + partidosGanados + "";
 	}
 
 }

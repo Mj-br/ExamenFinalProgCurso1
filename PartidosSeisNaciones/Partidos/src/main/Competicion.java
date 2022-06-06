@@ -99,7 +99,6 @@ public class Competicion
 		competir();
 		
 		
-		System.out.println(partidos);
 		
 	
 	}

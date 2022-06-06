@@ -50,12 +50,7 @@ public class Estadio {
 		partidos.add(partido);
 	}
 
-	// To String
-	
-	@Override
-	public String toString() {
-		return "Estadio [partidos=" + partidos + ", capacidad=" + capacidad + ", nombre=" + nombre + "]";
-	}
+
 	
 	
 	

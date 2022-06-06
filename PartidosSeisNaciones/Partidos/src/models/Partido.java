@@ -123,27 +123,35 @@ public class Partido {
 		 	this.setEstadio(estadio);
 	        
 	        Equipo equipoVencedor = this.calculaVencedor();
-	         System.out.println("\n" + this.toString());
+	         //System.out.println("\n" + this.toString());
 	        if (equipoVencedor == this.getEquipoLocal()) {
 	        	
 	        	this.getEquipoVisitante().addPerdido();
 	            this.getEquipoLocal().addGanado();
 	           
-	             System.out.println("Ha ganado " + this.getEquipoLocal());
+	             //System.out.println("Ha ganado el equipo de " + this.getEquipoLocal());
 	        } else if (equipoVencedor == this.getEquipoVisitante()) {
 	            
 	        	this.getEquipoLocal().addPerdido();
 	           
 	        	this.getEquipoVisitante().addGanado();
-	             System.out.println("Ha ganado " + this.getEquipoVisitante());
+	             //System.out.println("Ha ganado el equipo de " + this.getEquipoVisitante());
 	        } else {
 	        	
 	        	this.getEquipoVisitante().addEmpatado();
 	            this.getEquipoLocal().addEmpatado();
-	             System.out.println("Empate");
+	            // System.out.println("Empate");
 	        }
-	        System.out.println("\nEl partido ha finalizado, ya tenemos los resultados." + "\n");
+	        System.out.println("\nEl partido ha finalizado, ya tenemos los resultados.");
 	    }
+
+
+
+	@Override
+	public String toString() {
+		return "\n\nPartido [\n\nequipoLocal=" + equipoLocal + ", \n\nequipoVisitante=" + equipoVisitante + ", fecha= " + fecha
+				+ "]";
+	}
 
 
 
