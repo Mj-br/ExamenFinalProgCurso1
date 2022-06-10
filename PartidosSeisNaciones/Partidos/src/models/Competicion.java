@@ -35,8 +35,10 @@ public class Competicion
 			System.out.println(" Partido de las SEIS NACIONES ");
 			System.out.println("1. Generar los Equipos y sus integrantes.");
 			System.out.println("2. Simular Competicion.");
-			System.out.println("3. Mostrar Calificacion.");
-			System.out.println("4. Salir.");
+			System.out.println("3. Mostrar Equipos.");
+			System.out.println("4. Mostrar Calificacion.");
+			System.out.println("5. Comprueba actas de arbitro por consola.");
+			System.out.println("6. Salir.");
 			opcion = sc.nextInt();
 			switch (opcion) {
 
@@ -106,20 +108,43 @@ public class Competicion
 					case 2:
 					this.competir();
 					break;
-			
-
-				case 3:
-					competir();
-					break;
-
+		
+					
+				case 3: try {
+					
+					Torneo();
+					
+				}catch(Exception e) {
+					System.out.println(e);
+				}
+				break;
+					
 				case 4:
+					try {
+						
+						tablas();
+						
+					}catch(Exception e) {
+						System.out.println(e);
+					}
+					break;
+					
+				case 5:
+					Actas();
 					System.out.println("\n Gracias por jugar");
 					break;
+					
+				case 6:
+					System.out.println("\n Gracias por jugar");
+					break;
+					
+					
+				
 				default:
 					System.out.println("\n Valor introducido incorrecto.");
 					break;
 			}
-		} while (opcion != 4);
+		} while (opcion != 6);
 		sc.close();
 	}
 
@@ -199,7 +224,7 @@ public class Competicion
 	public void competir() {
 		
 		if (equipos.size() <= 0) {
-			System.out.println("\n No hay equipos para competir");
+			System.out.println("\n No hay equipos para competir.\n");
 		} else {
 			Collections.shuffle(equipos);
 
@@ -222,45 +247,62 @@ public class Competicion
 		}
 	}
 
+	// Método para ver las actas
+	
+	public void Actas() {
+		if (equipos.size() <= 0) {
+			System.out.println("\n No hay equipos, por favor crear los datos primero.\n");
+		} else {
+			System.out.println(arbitros.get(0).getActas() + "\n Las Actas de los partidos han sido creadas");
+		}
+	}
 	
 	// Método para los ficheros
 	
-	private static void confi() throws IOException {
+	private static void Torneo() throws IOException {
+		
+		if (equipos.size() <= 0) {
+			System.out.println("\n Aún no hay equipos inscritos en el torneo..\n");
+		} else {
+		
+		
+		
 		File fichero;
 		FileReader leerArchivo;
+		
+		File f1 = new File("Naciones.txt");
+		
+		FileWriter escribirArchivo = new FileWriter(f1);
+		
 		try {
-			FileWriter filew = new FileWriter("C:\\practico\\naciones.txt");
 
-			filew.write("LISTA DE ENTRENADORES\n");
-			for (int i = 0; i < entrenadores.size(); i++) {
-				filew.write("" + entrenadores.get(i) + "\n");
+			escribirArchivo.write("LISTA DE ENTRENADORES\n");
+			for (int i = 0; i < equipos.size(); i++) {
+				escribirArchivo.write("" + equipos.get(i).getPlantillaEntrenadores() + "\n");
 			}
 
-			filew.write("LISTA DE JUGADORES\n");
-			for (int i = 0; i < jugadores.size(); i++) {
-				filew.write("" + jugadores.get(i) + "\n");
+			escribirArchivo.write("LISTA DE JUGADORES\n");
+			for (int i = 0; i < equipos.size(); i++) {
+				escribirArchivo.write("" + equipos.get(i).getPlantillaJugadores() + "\n");
 			}
 
 
-			filew.write("LISTA DE ARBITROS\n");
+			escribirArchivo.write("LISTA DE ARBITROS\n");
 			for (int i = 0; i < arbitros.size(); i++) {
-				filew.write("" + arbitros.get(i) + "\n");
+				escribirArchivo.write("" + arbitros.get(i).toString() + "\n");
 			}
 
-			filew.write("JUGADORES POR EQUIPO\n");
+			escribirArchivo.write("JUGADORES POR EQUIPO\n");
 			for (int i = 0; i < 6; i++) {
-				filew.write("" + equipos.get(i) + "\n");
-				filew.write("" + equipos.get(i).getPlantillaJugadores() + "\n");
+				escribirArchivo.write("EQUIPO " + equipos.get(i).getNombreNacion() + "\n");
+				escribirArchivo.write("" + equipos.get(i).getPlantillaJugadores() + "\n");
 
-				// fw.write(""+equipos.get(2)+"\n");
-
-				filew.write("\n");
-				filew.write("EQUIPO" + i + "\n");
+				escribirArchivo.write("\n");
 			}
 
-			filew.close();
+			escribirArchivo.close();
 			
-			fichero = new File("C:\\practico1\\practico1.txt");
+			fichero = new File("Naciones.txt");
 			leerArchivo = new FileReader(fichero);
 			BufferedReader br = new BufferedReader(leerArchivo);
 			String l = "";
@@ -280,25 +322,38 @@ public class Competicion
 
 		}
 		
-		
+		}
 
 	}
 	
+	// crear la tabla en el fichero txt
+	
 	private static void tablas() throws IOException {
-		File f1;
-		FileReader lectorArchivo;
+		
+		if (equipos.size() <= 0) {
+			System.out.println("\n El toreno aún no se ha ejecutado..\n");
+		} else {
+		
+		
+		
+		File f1 = new File("tabla_clasificacion.txt");
+		
+		FileWriter escribirArchivo = new FileWriter(f1);
+		
+		
 
 		try {
-			FileWriter filew1 = new FileWriter("C:\\practica1\\tabla_clasificacion.txt");
 
-			filew1.write("Partidos");
-			for (int i = 0; i < partidos.size(); i++) {
-				filew1.write("\n" + partidos.get(i));
-				filew1.write("\n");
+			escribirArchivo.write("PARTIDOS SEIS NACIONES");
+			System.out.println("\n");
+			for (int i = 0; i < equipos.size(); i++) {
+				escribirArchivo.write("\n EQUIPO: "  + equipos.get(i).getNombreNacion() + ", PARTIDOS JUGADOS: " + equipos.get(i).getPartidosJugados() + ", VICTORIAS: " + equipos.get(i).getPartidosGanados() + ", DERROTAS: " + equipos.get(i).getPartidosPerdidos() + ", EMPATES: " + equipos.get(i).getPartidosEmpatados() + ", PUNTOS: " + equipos.get(i).getPuntos());
+				
 			}
-			filew1.close();
-			f1 = new File("C:\\practica1\\tabla_clasificacion.txt");
-			lectorArchivo = new FileReader(f1);
+			escribirArchivo.close();
+			
+	   f1 = new File("tabla_clasificacion.txt");
+			FileReader lectorArchivo = new FileReader(f1);
 			BufferedReader br = new BufferedReader(lectorArchivo);
 			String l1 = "";
 			String aux1 = "";
@@ -312,9 +367,9 @@ public class Competicion
 			br.close();
 			lectorArchivo.close();
 			System.out.println(l1);
-
+	
 		} catch (Exception e) {
-
+		}
 		}
 	}
 }

@@ -15,7 +15,8 @@ public class Arbitro extends Persona {
 		this.precision=precision;
 		 actas = new HashMap <Partido, String>();
 	}
-	
+
+
 
 	public int getPrecision() {
 		return precision;
@@ -31,26 +32,26 @@ public class Arbitro extends Persona {
 	
 	public void finalizarPartido(Partido partido) {
 		
-		System.out.println("El arbitro finaliza el partido, gracias por jugar\n");
+		System.out.println("El arbitro finaliza el partido, gracias por jugar\n ");
+		
 	}
 	
 	// El método de escribir el acta
 	
 	public void escribirActa(Partido partido) {
-           /*	HashMap<Partido, String> copia = new HashMap <>(actas);
-           	Set<Partido>setPartidos = Partido.keySet();
-           	Partido partidoMax = null;
-           	String act ="/nHISTORIAL DE ACTAS";
-           	act += "\n acta: V - D - E" + jugar();
-           	
-           	if (copia.containsValue(0)) {
-           		System.out.println("El primer arbitro escribe las actas");
-           	}
-           	*/
+          
                 
         actas.put(partido, partido.toString() );
         
     }
+	
+	
+
+	public HashMap<Partido, String>  getActas() {
+		
+		return actas;
+	}
+
 
 	@Override
 	public String toString() {

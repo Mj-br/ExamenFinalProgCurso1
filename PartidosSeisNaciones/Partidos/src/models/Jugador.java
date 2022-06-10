@@ -21,6 +21,7 @@ public class Jugador extends Persona {
 		this.resistencia = resistencia;
 	}
 
+
 	public Equipo getEquipo() {
 		return equipo;
 	}

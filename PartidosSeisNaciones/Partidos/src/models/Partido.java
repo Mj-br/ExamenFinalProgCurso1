@@ -153,26 +153,26 @@ public class Partido {
 	        
 	        Equipo equipoVencedor = this.calculaVencedor();
 	        
-					// System.out.println("\n" + this.toString());
+				
 					if (equipoVencedor == this.getEquipoLocal()) {
 						
 						this.getEquipoLocal().addGanado();
 						this.getEquipoVisitante().addPerdido();
 						
-						golesLocal= randomInt(0,10);
+						golesLocal= randomInt(20,30);
 						golesVisitante= randomInt(0,15);
 						
-						// System.out.println("Ha ganado " + this.getEquipoLocal());
+						
 					} else if (equipoVencedor == this.getEquipoVisitante()) {
 						
 						this.getEquipoVisitante().addGanado();
 						
 						this.getEquipoLocal().addPerdido();
 						
-						golesLocal=randomInt(0,20);
-						golesVisitante=randomInt(10,40);
+						golesLocal=randomInt(0,19);
+						golesVisitante=randomInt(20,40);
 						
-						// System.out.println("Ha ganado " + this.getEquipoVisitante());
+					
 					} else {
 						this.getEquipoLocal().addEmpatado();
 						this.getEquipoVisitante().addEmpatado();
@@ -180,7 +180,7 @@ public class Partido {
 						
 						golesLocal=auxGoles;
 						golesVisitante=auxGoles;
-						// System.out.println("Empate");
+						
 					}
 					
 					arbitros.get(0).finalizarPartido(this);
@@ -191,8 +191,8 @@ public class Partido {
 	  }
 	@Override
 	public String toString() {
-		return "\n\nPartido [\n\nequipoLocal=" + equipoLocal + ", \n\nequipoVisitante=" + equipoVisitante + ", fecha= " + fecha
-				+ "]";
+		return "\n\nPartido [\n\nequipoLocal=" + equipoLocal + ", \n\nequipoVisitante=" + equipoVisitante + ", \t\nfecha del partido= " + fecha + "\nGoles Local: " 
+				+ golesLocal + "\nGoles Visitante: " + golesVisitante + "\n]";
 	}
 
 

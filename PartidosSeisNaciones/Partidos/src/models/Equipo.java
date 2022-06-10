@@ -14,6 +14,7 @@ public class Equipo {
 	private int partidosGanados;
 	private int partidosJugados;
 	private int mediaTeam;
+	private int puntosTotales;
 	
 	//Constructores
 	
@@ -38,6 +39,21 @@ public class Equipo {
 	
 	//Setter y getter de la alineacion
 	
+	private void calcularPuntos() {
+		
+		int puntos = 0;
+		puntos += this.partidosGanados*3;
+		puntos += this.partidosEmpatados;
+		puntosTotales = puntos;
+		
+	}
+	
+	public int getPuntos () {
+		
+		calcularPuntos();
+		
+		return puntosTotales;
+	}
 	
 	public void setAlineacion(List<Jugador> alineacion) {
 		this.alineacion = alineacion;
@@ -63,12 +79,12 @@ public class Equipo {
 	    }
 	 
 	public int getPartidosJugados() {
+		
+		partidosJugados = this.partidosGanados + this.partidosEmpatados + this.partidosPerdidos;
+		
 		return partidosJugados;
 	}
 
-	public void setPartidosJugados(int partidosJugados) {
-		this.partidosJugados = partidosJugados;
-	}
 
 	// añade jugador y entrenador
 
@@ -112,6 +128,32 @@ public class Equipo {
         partidosPerdidos++;
     }
 	
+    
+    
+	public int getPartidosEmpatados() {
+		return partidosEmpatados;
+	}
+
+	public void setPartidosEmpatados(int partidosEmpatados) {
+		this.partidosEmpatados = partidosEmpatados;
+	}
+
+	public int getPartidosPerdidos() {
+		return partidosPerdidos;
+	}
+
+	public void setPartidosPerdidos(int partidosPerdidos) {
+		this.partidosPerdidos = partidosPerdidos;
+	}
+
+	public int getPartidosGanados() {
+		return partidosGanados;
+	}
+
+	public void setPartidosGanados(int partidosGanados) {
+		this.partidosGanados = partidosGanados;
+	}
+
 	@Override
 	public String toString() {
 		return "\nEquipo de: " + nombreNacion + ", Plantilla Total="
